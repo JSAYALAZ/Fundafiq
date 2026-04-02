@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { JSX } from "react";
 
@@ -17,33 +16,30 @@ export function ConvenioCard({
   link: string;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="bg-white rounded-xl overflow-hidden flex flex-col md:flex-row shadow-md"
-    >
-      <Image
-        height={"100"}
-        width={"100"}
-        src={logo}
-        alt={name}
-        className="w-full md:w-48 object-contain bg-gray-50 p-4"
-      />
-      <div className="p-6 flex-1">
-        <h3 className="text-xl font-semibold text-slate-800">{name}</h3>
-        <p className="text-slate-600 mt-2 text-sm">{desc}</p>
-        <p className="text-slate-500 mt-1 text-xs italic">{extra}</p>
+    <div className="convenio-card">
+      <div className="convenio-img-wrap">
+        <Image
+          height={300}
+          width={300}
+          src={logo}
+          alt={name}
+          className="convenio-img"
+        />
+      </div>
+      <div className="convenio-content">
+        <h3>{name}</h3>
+        <p style={{ color: "var(--text-main)", marginBottom: "1rem" }}>{desc}</p>
+        <p style={{ fontSize: "0.875rem", fontStyle: "italic", color: "var(--text-muted)", marginBottom: "1rem" }}>{extra}</p>
         <a
           href={link}
           target="_blank"
           rel="noreferrer"
-          className="text-teal-600 hover:underline mt-3 inline-block text-sm"
+          style={{ color: "var(--c-primary)", fontWeight: "600", textDecoration: "none" }}
         >
-          Conocer más
+          Conocer más institucionalmente →
         </a>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -57,18 +53,14 @@ export function StatCard({
   description: string;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="bg-white rounded-2xl shadow-lg px-6 py-8 flex flex-col items-center"
-    >
-      <p className="text-4xl font-extrabold text-teal-600">{value}</p>
-      <h4 className="mt-2 text-lg font-semibold text-slate-800">{label}</h4>
-      <p className="mt-1 text-sm text-slate-500 text-center">{description}</p>
-    </motion.div>
+    <div className="clean-card" style={{ textAlign: "center" }}>
+      <span className="stat-value">{value}</span>
+      <h4 className="stat-label">{label}</h4>
+      <p className="stat-desc">{description}</p>
+    </div>
   );
 }
+
 export function SystemCard({
   icon,
   title,
@@ -79,12 +71,12 @@ export function SystemCard({
   desc: string;
 }) {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md flex items-start gap-4">
-      {icon}
-      <div>
-        <h3 className="text-lg font-bold text-slate-800">{title}</h3>
-        <p className="text-slate-600 text-sm">{desc}</p>
+    <div className="clean-card">
+      <div className="icon-box">
+        {icon}
       </div>
+      <h3 style={{ fontSize: "1.25rem", color: "var(--text-dark)", marginBottom: "0.75rem" }}>{title}</h3>
+      <p style={{ color: "var(--text-main)", lineHeight: "1.6" }}>{desc}</p>
     </div>
   );
 }
@@ -101,25 +93,21 @@ export function TestimonialCard({
   quote: string;
 }) {
   return (
-    <motion.blockquote
-      className="relative bg-white p-6 rounded-2xl shadow-md border-t-4 border-teal-500 text-left flex gap-4"
-      initial={{ opacity: 0, y: 25 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
-      <Image
-        src={image}
-        height={"100"}
-        width={"100"}
-        alt={name}
-        className="w-20 h-20 rounded-full object-cover border-2 border-white shadow-md"
-      />
-      <div>
-        <p className="text-slate-700 italic">“{quote}”</p>
-        <footer className="mt-2 text-slate-600 font-medium">
-          — {name}, {age} años
-        </footer>
+    <div className="testimonial-card">
+      <p className="testimonial-quote">&quot;{quote}&quot;</p>
+      <div className="testimonial-author">
+        <Image
+          src={image}
+          height={100}
+          width={100}
+          alt={name}
+          className="testimonial-img"
+        />
+        <div>
+          <strong style={{ display: "block", color: "var(--c-primary)" }}>{name}</strong>
+          <span style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>{age}</span>
+        </div>
       </div>
-    </motion.blockquote>
+    </div>
   );
 }

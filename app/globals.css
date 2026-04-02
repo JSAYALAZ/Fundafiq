@@ -1,26 +1,468 @@
-@import "tailwindcss";
+/* app/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Institutional Color Palette - "Health & Trust" */
+  --c-primary: #00509E;    /* Trust Blue */
+  --c-primary-light: #E6F0FA; /* Very light blue for backgrounds */
+  --c-secondary: #00A896;  /* Health Teal */
+  --c-accent: #F29C38;     /* Warm Accent (Orange/Gold) */
+  --c-accent-hover: #D98426;
+  
+  --c-white: #FFFFFF;
+  --c-bg-main: #F4F7FB;    /* Soft medical gray/blue off-white */
+  
+  --text-dark: #1F2937;    /* Slate 800 */
+  --text-main: #4B5563;    /* Slate 600 */
+  --text-muted: #6B7280;   /* Slate 500 */
+  
+  /* Typography */
+  --font-sans: 'Public Sans', var(--font-geist-sans), sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  
+  /* Shadows - Crisp, clean, not blurry glass */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 80, 158, 0.1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--c-bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  line-height: 1.6;
+}
+
+/* ============================
+   TYPOGRAPHY
+============================ */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-dark);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  color: var(--c-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
+  color: var(--text-main);
+  max-width: 650px;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  color: var(--c-primary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-main);
+  font-size: 1.125rem;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
+
+/* ============================
+   LAYOUT & UTILS
+============================ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 5rem 0;
+}
+
+.bg-white {
+  background-color: var(--c-white);
+}
+
+.bg-light-blue {
+  background-color: var(--c-primary-light);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 3rem;
+  align-items: center;
+}
+
+/* ============================
+   HERO SECTION
+============================ */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--c-bg-main);
+  overflow: hidden;
+}
+
+.hero-bg-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-bg-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--c-bg-main) 0%, rgba(244, 247, 251, 0) 100%);
+  z-index: 2;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center left;
+  opacity: 0.9;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 650px;
+}
+
+.hero-logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  background: var(--c-white);
+  padding: 0.5rem;
+}
+
+/* Mobile Hero adjustments */
+@media (max-width: 991px) {
+  .hero-bg-container {
+    width: 100%;
+    opacity: 0.15;
+  }
+  .hero-content {
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-bg-container::before {
+    background: none;
+  }
+}
+
+/* ============================
+   BUTTONS
+============================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 8px; /* Clean, trust-inspiring border radius, no pills */
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--c-primary);
+  color: var(--c-white);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  background-color: #004080;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-whatsapp {
+  background-color: var(--c-secondary);
+  color: var(--c-white);
+  box-shadow: 0 4px 12px rgba(0, 168, 150, 0.2);
+}
+
+.btn-whatsapp:hover {
+  background-color: #008f80;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 168, 150, 0.3);
+}
+
+/* ============================
+   CLEAN CARDS
+============================ */
+.clean-card {
+  background: var(--c-white);
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.clean-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: #D1D5DB;
+}
+
+/* Icons within cards */
+.icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background-color: var(--c-primary-light);
+  color: var(--c-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Stats */
+.stat-value {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--c-primary);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.stat-label {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 1.125rem;
+}
+
+.stat-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ============================
+   STEPS (NUEVOS PACIENTES)
+============================ */
+.step-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+.step-card {
+  display: flex;
+  gap: 1.5rem;
+  background: var(--c-white);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--c-secondary);
+}
+
+.step-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--c-primary-light);
+  -webkit-text-stroke: 1px var(--c-primary);
+  line-height: 1;
+}
+
+.step-content h3 {
+  font-size: 1.25rem;
+  color: var(--c-primary);
+  margin-bottom: 0.5rem;
+}
+
+/* ============================
+   MAP AND FOOTER
+============================ */
+.map-container {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  height: 450px;
+  width: 100%;
+  border: 1px solid #E5E7EB;
+}
+
+.footer {
+  background: var(--c-primary);
+  color: var(--c-white);
+  padding: 4rem 0 2rem;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-col h3 {
+  color: var(--c-white);
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-col p, .footer-col li {
+  color: #B3D4F5;
+  margin-bottom: 0.75rem;
+}
+
+.footer-col a {
+  color: #B3D4F5;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover {
+  color: var(--c-white);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #B3D4F5;
+  font-size: 0.9rem;
+}
+
+/* Convenio / Testimonial fixes */
+.convenio-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #E5E7EB;
+  transition: transform 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .convenio-card {
+    flex-direction: row;
+  }
+}
+
+.convenio-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.convenio-img-wrap {
+  width: 100%;
+  height: 200px;
+  background: var(--c-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+@media (min-width: 768px) {
+  .convenio-img-wrap {
+    width: 250px;
+    height: auto;
+    flex-shrink: 0;
+    border-bottom: none;
+    border-right: 1px solid #E5E7EB;
+  }
+}
+
+.convenio-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.convenio-content {
+  padding: 2rem;
+}
+
+.convenio-content h3 {
+  font-size: 1.25rem;
+  color: var(--c-primary);
+  margin-bottom: 0.75rem;
+}
+
+.testimonial-card {
+  background: var(--c-white);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #E5E7EB;
+  position: relative;
+  text-align: left;
+}
+
+.testimonial-quote {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.testimonial-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }

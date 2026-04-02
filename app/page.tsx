@@ -7,6 +7,8 @@ import {
   Droplets,
   Stethoscope,
   UtensilsCrossed,
+  MessageCircle,
+  UserPlus
 } from "lucide-react";
 
 import {
@@ -19,24 +21,24 @@ import Image from "next/image";
 
 const DISEASE_SYSTEMS = [
   {
-    icon: <Stethoscope className="w-6 h-6 text-teal-600" />,
-    title: "Pulmones",
-    desc: "Causa infecciones respiratorias frecuentes, tos crónica y daño pulmonar progresivo.",
+    icon: <Stethoscope size={28} />,
+    title: "Vías Respiratorias",
+    desc: "Infecciones frecuentes, tos crónica y dificultad para respirar debido a la acumulación de moco espeso.",
   },
   {
-    icon: <UtensilsCrossed className="w-6 h-6 text-teal-600" />,
+    icon: <UtensilsCrossed size={28} />,
     title: "Sistema Digestivo",
-    desc: "Dificulta la digestión de alimentos, causa malabsorción y desnutrición.",
+    desc: "Obstrucción en el páncreas que impide la correcta absorción de nutrientes, causando desnutrición.",
   },
   {
-    icon: <HeartPulse className="w-6 h-6 text-teal-600" />,
-    title: "Sistema Endocrino",
-    desc: "Puede generar diabetes relacionada con la FQ por daño pancreático progresivo.",
+    icon: <HeartPulse size={28} />,
+    title: "Retos Diarios",
+    desc: "Se requieren nebulizaciones continuas, fisioterapia respiratoria y enzimas pancreáticas en cada comida.",
   },
   {
-    icon: <Droplets className="w-6 h-6 text-teal-600" />,
-    title: "Glándulas Sudoríparas",
-    desc: "Produce sudor excesivamente salado; base del test diagnóstico.",
+    icon: <Droplets size={28} />,
+    title: "El Sudor Salado",
+    desc: "La prueba del sudor es el estándar de oro para el diagnóstico temprano de esta condición genética.",
   },
 ];
 
@@ -44,15 +46,15 @@ const CONVENIOS = [
   {
     logo: "/hvcm.png",
     name: "Hospital Vicente Corral Moscoso",
-    desc: "Clínica especializada en FQ en Cuenca, atención médica integral pediátrica.",
-    extra: "Colaboración en equipamiento y terapias con apoyo institucional.",
+    desc: "Referencia para diagnóstico y tratamiento oportuno en la zona sur del Ecuador. Colaboramos estrechamente con el departamento de Neumología Pediátrica para asegurar la atención médica pública continua.",
+    extra: "Cuidados médicos fundamentales y derivación.",
     link: "#",
   },
   {
     logo: "/bridge-of-hope.png",
     name: "CF Bridge of Hope",
-    desc: "Acceso a tratamientos avanzados en EE.UU., como trasplantes y moduladores CFTR.",
-    extra: "Alianza internacional que extiende esperanza a pacientes críticos.",
+    desc: "Organización internacional que colabora brindando esperanza y acceso a tratamientos o evaluaciones complejas en Estados Unidos, incluyendo posibles candidatos a trasplante pulmonar.",
+    extra: "Alianza de apoyo internacional médico.",
     link: "#",
   },
 ];
@@ -63,91 +65,146 @@ const TESTIMONIOS = [
     name: "Andrés Villacís",
     age: "40",
     quote:
-      "Me dijeron que no viviría más de 3 años tras mi diagnóstico. Han pasado 16. Lucho por motivar a otros con alegría y fe.",
+      "El diagnóstico temprano cambió mi vida. Llegar a FUNDAFIQ me dio la estructura médica y el apoyo emocional que necesitaba en mi adolescencia. Hoy lucho por transmitir esa esperanza.",
   },
   {
     image: "/persona.jpg",
-    name: "María Gracia",
-    age: "15",
+    name: "Familia Cárdenas",
+    age: "Padres de paciente",
     quote:
-      "La FQ me quitó dos hermanos, pero yo sigo adelante por ellos. Amo bailar y sueño con ser veterinaria.",
+      "Sentíamos mucho miedo cuando diagnosticaron a nuestra hija. La fundación no solo nos guió en los trámites para las medicinas, sino que nos abrazó cuando más solos nos sentíamos.",
   },
 ];
 
 export default function LandingPage() {
-  return (
-    <div className="font-sans text-slate-800 bg-gray-50 scroll-smooth">
-      {/* HERO */}
-      <header
-        className="flex flex-col items-end justify-center bg-cover md:bg-auto bg-center md:bg-left bg-no-repeat h-screen relative transition-opacity"
-        style={{ backgroundImage: "url('/font.png')" }}
-      >
-        <span className="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-white pointer-events-none w-3/5" />
+  const WP_NUMBER = "593999121872";
+  const WP_LINK = `https://wa.me/${WP_NUMBER}?text=Hola,%20busco%20informaci%C3%B3n%20y%20apoyo%20sobre%20Fibrosis%20Qu%C3%ADstica.`;
 
-        <div className="flex flex-col items-center h-screen justify-center w-full md:w-2/5  bg-none md:bg-teal-50 text-center">
+  return (
+    <>
+      {/* HERO SECTION - MEDICAL/TRUST */}
+      <header className="hero">
+        <div className="container">
+          <div className="hero-content">
+            <Image
+              src="/logo.jpg"
+              height={100}
+              width={100}
+              alt="Logo FUNDAFIQ"
+              className="hero-logo"
+              unoptimized={true}
+            />
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="hero-title"
+            >
+              No estás solo frente a la Fibrosis Quística.
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="hero-subtitle"
+            >
+              <strong>FUNDAFIQ</strong> es tu guía y soporte en Cuenca, Ecuador. Trabajamos por el diagnóstico temprano, acceso a tratamientos y el bienestar integral de los pacientes del centro-sur del país.
+            </motion.p>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
+            >
+              <a href={WP_LINK} target="_blank" rel="noreferrer" className="btn btn-whatsapp">
+                <MessageCircle size={20} /> Orientación por WhatsApp
+              </a>
+              <a href="#como-te-ayudamos" className="btn" style={{ backgroundColor: "var(--c-white)", color: "var(--c-primary)", border: "1px solid #D1D5DB" }}>
+                Conocer más
+              </a>
+            </motion.div>
+          </div>
+        </div>
+        <div className="hero-bg-container">
           <Image
-            src="/logo.jpg"
-            height={"100"}
-            width={"100"}
-            alt="Logo FUNDAFIQ"
-            className="w-32 md:w-48 drop-shadow-xl"
+            src="/hero-medical.png"
+            alt="Atención médica profesional y compasiva"
+            width={1200}
+            height={800}
+            className="hero-img"
+            priority={true}
+            unoptimized={true}
           />
-          <motion.h1
-            className="mt-6 text-4xl md:text-5xl font-extrabold text-black tracking-tight"
-            initial={{ y: 40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-          >
-            Fundación FUNDAFIQ Ecuador
-          </motion.h1>
-          <p className="mt-3 text-lg md:text-xl text-slate-700 max-w-xl">
-            Brindamos esperanza, atención médica y apoyo emocional a pacientes
-            con Fibrosis Quística.
-          </p>
-          <motion.a
-            href="#contacto"
-            className="mt-6 px-8 py-4 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-semibold shadow-md"
-            whileHover={{ y: -2 }}
-          >
-            ¡Únete como voluntario!
-          </motion.a>
         </div>
       </header>
 
-      {/* ESTADÍSTICAS */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6 max-w-5xl">
+      {/* ESTADÍSTICAS RÁPIDAS (Confianza Institucional) */}
+      <section className="bg-white" style={{ padding: "3rem 0", borderBottom: "1px solid #E5E7EB" }}>
+        <div className="container grid-3">
           <StatCard
-            label="Pacientes Activos"
-            value="45"
-            description="Niños y jóvenes diagnosticados con FQ reciben apoyo continuo."
+            label="Pacientes Atendidos"
+            value="45+"
+            description="Llevando un control activo en articulación médica pública."
           />
           <StatCard
-            label="Años de Servicio"
+            label="Años en Ecuador"
             value="13"
-            description="Desde 2012 mejorando vidas en el Austro del Ecuador."
+            description="Más de una década educando e interviniendo asertivamente."
           />
           <StatCard
-            label="Voluntarios"
-            value="28"
-            description="Profesionales y estudiantes comprometidos con nuestra causa."
+            label="Convenios de Salud"
+            value="Alianzas"
+            description="Nacionales e internacionales para optimizar recursos."
           />
         </div>
       </section>
 
-      {/* FIBROSIS QUÍSTICA */}
-      <section id="fibrosis-quistica" className="py-20 bg-teal-50">
-        <div className="container mx-auto max-w-4xl px-4">
-          <h2 className="text-3xl font-bold text-teal-700 text-center mb-8">
-            ¿Qué es la Fibrosis Quística?
-          </h2>
-          <p className="text-lg text-slate-700 mb-6 text-justify">
-            La Fibrosis Quística (FQ) es una enfermedad genética, crónica y
-            potencialmente mortal que afecta principalmente a pulmones, sistema
-            digestivo y glándulas sudoríparas. Es causada por mutaciones en el
-            gen CFTR, lo que provoca secreciones espesas que obstruyen órganos
-            vitales.
+      {/* SECCIÓN NUEVOS PACIENTES - ¿CÓMO TE AYUDAMOS? */}
+      <section id="como-te-ayudamos" className="section bg-light-blue">
+        <div className="container grid-2">
+          <div>
+            <h2 className="section-title" style={{ textAlign: "left" }}>¿Recibiste un diagnóstico reciente?</h2>
+            <p className="hero-subtitle" style={{ color: "var(--text-main)", marginBottom: "2rem" }}>
+              Entendemos el miedo y la incertidumbre. En Ecuador, lidiar con el acceso a exámenes (como la prueba de sudor) y medicinas de alto costo es un desafío inmenso, pero **esta fundación existe para acompañarte.**
+            </p>
+            <a href={WP_LINK} target="_blank" rel="noreferrer" className="btn btn-primary">
+              <UserPlus size={20} /> Contáctanos como Nuevo Paciente
+            </a>
+          </div>
+          
+          <div className="step-container">
+            <div className="step-card">
+              <div className="step-number">1</div>
+              <div className="step-content">
+                <h3>Contacto Inicial Breve</h3>
+                <p>Escríbenos. Te escuchamos y analizamos en qué estado clínico o legal te encuentras respecto al diagnóstico de tu familiar.</p>
+              </div>
+            </div>
+            <div className="step-card">
+              <div className="step-number">2</div>
+              <div className="step-content">
+                <h3>Derivación al Especialista</h3>
+                <p>Facilitamos el puente con el área de Neumología Pediátrica del <strong>Hospital Vicente Corral Moscoso</strong> para asegurar tu atención pública.</p>
+              </div>
+            </div>
+            <div className="step-card">
+              <div className="step-number">3</div>
+              <div className="step-content">
+                <h3>Seguimiento y Red de Apoyo</h3>
+                <p>Te unimos a nuestra comunidad, ayudándote en los trámites para medicamentos, enseñándote terapias respiratorias y blindando tus derechos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FIBROSIS QUÍSTICA EN ECUADOR */}
+      <section id="fibrosis-quistica" className="section bg-white">
+        <div className="container">
+          <h2 className="section-title">Sobre la Fibrosis Quística</h2>
+          <p className="section-subtitle">
+            La Fibrosis Quística (FQ) es una condición genética y crónica. Su temprano diagnóstico hace toda la diferencia en la calidad y expectativa de vida. En FUNDAFIQ, trabajamos incansablemente por visibilizar esta enfermedad en la salud pública ecuatoriana.
           </p>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid-2">
             {DISEASE_SYSTEMS.map((sys) => (
               <SystemCard key={sys.title} {...sys} />
             ))}
@@ -155,13 +212,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CONVENIOS */}
-      <section id="convenios" className="py-20 bg-white">
-        <div className="container mx-auto max-w-5xl px-4 text-center">
-          <h2 className="text-3xl font-bold text-teal-700 mb-10">
-            Nuestros Convenios
-          </h2>
-          <div className="space-y-6">
+      {/* CONVENIOS INSTITUCIONALES */}
+      <section id="convenios" className="section bg-light-blue">
+        <div className="container">
+          <h2 className="section-title">Nuestra Red Médica</h2>
+          <p className="section-subtitle">
+            Articulamos esfuerzos con la red de salud pública en Cuenca y fundaciones del extranjero para proveer la plataforma de atención más completa posible para el paciente del sur del país.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "2rem", maxWidth: "900px", margin: "0 auto" }}>
             {CONVENIOS.map((c) => (
               <ConvenioCard key={c.name} {...c} />
             ))}
@@ -170,12 +228,11 @@ export default function LandingPage() {
       </section>
 
       {/* TESTIMONIOS */}
-      <section id="testimonios" className="py-20 bg-teal-50">
-        <div className="container mx-auto max-w-5xl px-4 text-center">
-          <h2 className="text-3xl font-bold text-teal-700 mb-10">
-            Historias de Vida
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
+      <section id="testimonios" className="section bg-white">
+        <div className="container text-center">
+          <h2 className="section-title">Nuestra Comunidad</h2>
+          <p className="section-subtitle">Historias de familias que han recorrido este camino y viven hoy con fe.</p>
+          <div className="grid-2" style={{ maxWidth: "1000px", margin: "0 auto" }}>
             {TESTIMONIOS.map((t) => (
               <TestimonialCard key={t.name} {...t} />
             ))}
@@ -184,12 +241,11 @@ export default function LandingPage() {
       </section>
 
       {/* UBICACIÓN */}
-      <section id="ubicacion" className="py-20 bg-white">
-        <div className="container mx-auto max-w-4xl px-4 text-center">
-          <h2 className="text-3xl font-bold text-teal-700 mb-6">
-            ¿Dónde estamos?
-          </h2>
-          <div className="w-full h-64 overflow-hidden rounded-2xl shadow-md">
+      <section id="ubicacion" className="section bg-light-blue">
+        <div className="container" style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
+          <h2 className="section-title">Visítanos en Cuenca</h2>
+          <p className="section-subtitle">Recuerda comunicarte previamente para agendar una entrevista con el paciente y confirmar disponibilidad médica en la zona.</p>
+          <div className="map-container">
             <iframe
               title="Mapa FUNDAFIQ"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.51366961289!2d-79.00208889999999!3d-2.9001284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91cce1819ba880f5%3A0x4a90f8427c6e1ca1!2sGran%20Colombia%2011-46%2C%20Cuenca%2C%20Ecuador!5e0!3m2!1sen!2sus!4v1717989990000!5m2!1sen!2sus"
@@ -199,54 +255,43 @@ export default function LandingPage() {
               loading="lazy"
             />
           </div>
-          <p className="mt-4 flex justify-center items-center gap-2 text-slate-600">
-            <MapPin className="w-5 h-5 text-teal-600" /> Gran Colombia 11‑46 y
-            General Torres, Cuenca – Ecuador
-          </p>
         </div>
       </section>
 
       {/* CONTACTO */}
-      <footer id="contacto" className="py-16 bg-teal-700 text-white">
-        <div className="container mx-auto max-w-4xl px-4 text-center">
-          <h2 className="text-2xl font-semibold mb-6">Contáctanos</h2>
-          <div className="flex flex-col md:flex-row justify-around items-start gap-8 text-left">
-            <div>
-              <h3 className="font-semibold mb-2 flex items-center gap-2">
-                <Phone className="w-4 h-4" /> Datos de contacto
-              </h3>
-              <ul className="space-y-1">
-                <li>Tel: +593 99 912 1872</li>
-                <li>Email: fundafiq.cuenca@hotmail.com</li>
-              </ul>
+      <footer id="contacto" className="footer">
+        <div className="container">
+          <div className="footer-top">
+            <div className="footer-col" style={{ maxWidth: "350px" }}>
+              <Image src="/logo.jpg" alt="Logo FUNDAFIQ" width={60} height={60} style={{ borderRadius: "8px", marginBottom: "1rem" }} unoptimized={true} />
+              <p>Tu familia de apoyo para la Fibrosis Quística en Cuenca, Ecuador.</p>
             </div>
-            <div>
-              <h3 className="font-semibold mb-2">Síguenos</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#" className="hover:underline">
-                    Facebook
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline">
-                    Instagram
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline">
-                    Twitter
-                  </a>
-                </li>
+            
+            <div className="footer-col">
+              <h3><Phone size={20} /> Canal Directo</h3>
+              <ul>
+                <li><strong>WhatsApp:</strong> +593 99 912 1872</li>
+                <li><strong>Email:</strong> fundafiq.cuenca@hotmail.com</li>
+              </ul>
+              <a href={WP_LINK} target="_blank" rel="noreferrer" className="btn btn-whatsapp" style={{ marginTop: "1rem" }}>
+                Enviar Mensaje Ahora
+              </a>
+            </div>
+
+            <div className="footer-col">
+              <h3><MapPin size={20}/> Dirección</h3>
+              <ul>
+                <li>Gran Colombia 11‑46</li>
+                <li>y General Torres</li>
+                <li>Cuenca – Ecuador</li>
               </ul>
             </div>
           </div>
-          <p className="mt-10 text-sm text-white/80">
-            © {new Date().getFullYear()} Fundación FUNDAFIQ | José Ayala. Todos
-            los derechos reservados.
-          </p>
+          <div className="footer-bottom">
+            <p>© {new Date().getFullYear()} Fundación FUNDAFIQ | Cuenca, Ecuador. Todos los derechos reservados.</p>
+          </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
